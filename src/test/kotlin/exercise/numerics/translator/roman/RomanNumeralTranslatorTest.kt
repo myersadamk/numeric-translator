@@ -79,6 +79,16 @@ class TranslationFromRomanNumeralTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = ["O", "X?", "I1", "X IV"])
+    fun `Rejects invalid characters`(text: String) {
+        assertFailsWith(
+            exceptionClass = IllegalArgumentException::class,
+            message = "Text must contain only valid roman numerals",
+            block = { translator.fromText(text) },
+        )
+    }
+
+    @ParameterizedTest
     @EnumSource(RomanNumeral::class)
     fun `Translates evenly-divisible Roman Numerals`(romanNumeral: RomanNumeral) {
         assertEquals(romanNumeral.value, translator.fromText(romanNumeral.symbol))
