@@ -29,7 +29,22 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
      */
     override fun fromText(text: String): Int {
         validateTextCanBeTranslated(text)
-        TODO("Not yet implemented")
+        var result = 0
+
+        text.windowed(2, 1, partialWindows = true) {
+            val currentRomanNumeral = toRomanNumeral(it.first())
+            val nextRomanNumeral = it.lastOrNull()?.let { toRomanNumeral(it) }
+
+            if (nextRomanNumeral == null) {
+                result += currentRomanNumeral.value
+            } else if (currentRomanNumeral.value < nextRomanNumeral.value) {
+                result -= currentRomanNumeral.value
+            } else {
+                result += currentRomanNumeral.value
+            }
+        }
+
+        return result
     }
 
     companion object {
@@ -49,5 +64,9 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
                 throw IllegalArgumentException("Textual representation of a roman numeral cannot be empty or blank")
             }
         }
+
+        // The relationship between string/char as it relates to `enumValueOf` is a bit awkward/verbose
+        private fun toRomanNumeral(character: Char) =
+            enumValueOf<RomanNumeral>(character.toString())
     }
 }
