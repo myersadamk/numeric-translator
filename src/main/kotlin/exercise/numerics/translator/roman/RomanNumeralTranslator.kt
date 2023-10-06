@@ -12,13 +12,12 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
         var remainder = value
 
         return buildString {
-            for (romanNumeral in DESCENDING_ROMAN_NUMERALS) {
+            for (romanNumeral in RomanNumeral.DESCENDING_ORDER) {
                 val occurrences = remainder / romanNumeral.value
 
                 if (occurrences > 0) {
                     append(romanNumeral.symbol.repeat(occurrences))
                 }
-
                 remainder %= romanNumeral.value
             }
         }
@@ -43,12 +42,10 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
                 result += currentRomanNumeral.value
             }
         }
-
         return result
     }
 
     companion object {
-        val DESCENDING_ROMAN_NUMERALS = RomanNumeral.values().sortedByDescending { it.value }
 
         private fun validateIntCanBeTranslated(value: Int) {
             if (value == 0) {
@@ -65,7 +62,8 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
             }
         }
 
-        // The relationship between string/char as it relates to `enumValueOf` is a bit awkward/verbose
+        // The relationship between string/char as it relates to `enumValueOf` is a bit awkward/verbose;
+        // enumValueOf is generally preferred to Enum.valueOf in Kotlin because it has a reified type
         private fun toRomanNumeral(character: Char) =
             enumValueOf<RomanNumeral>(character.toString())
     }
