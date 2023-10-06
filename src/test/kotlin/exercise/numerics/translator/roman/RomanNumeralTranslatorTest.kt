@@ -11,7 +11,7 @@ class RomanNumeralTranslatorTest {
     @Test
     fun `Rejects zero`() {
         assertFailsWith(
-            exceptionClass = IllegalAccessException::class,
+            exceptionClass = IllegalArgumentException::class,
             message = "0 is not supported by the roman numeral system",
             block = { translator.toText(0) }
         )
@@ -20,7 +20,7 @@ class RomanNumeralTranslatorTest {
     @Test
     fun `Rejects negative values`() {
         assertFailsWith(
-            exceptionClass = IllegalAccessException::class,
+            exceptionClass = IllegalArgumentException::class,
             message = "Negative numbers are not supported by the roman numeral system",
             block = { translator.toText(-1) }
         )
