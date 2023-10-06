@@ -4,17 +4,18 @@ import exercise.numerics.translator.NumericTranslator
 
 class RomanNumeralTranslator : NumericTranslator<Int> {
 
-    override fun toText(value: Int): String {
-        return ORDERED_NUMERALS.fold("") { accumulator, romanNumeral ->
-            val occurrences = value / romanNumeral.value
-            if (occurrences < 0) {
-               return ""
+    override fun toText(value: Int) =
+        buildString {
+            for (romanNumeral in DESCENDING_ROMAN_NUMERALS) {
+                val occurrences = value / romanNumeral.value
+
+                if (occurrences > 0) {
+                    append(romanNumeral.symbol.repeat(occurrences))
+                }
             }
-            return accumulator + romanNumeral.symbol.repeat(occurrences)
         }
-    }
 
     companion object {
-        val ORDERED_NUMERALS = RomanNumeral.values().sortedByDescending { it.value }
+        val DESCENDING_ROMAN_NUMERALS = RomanNumeral.values().sortedByDescending { it.value }
     }
 }
