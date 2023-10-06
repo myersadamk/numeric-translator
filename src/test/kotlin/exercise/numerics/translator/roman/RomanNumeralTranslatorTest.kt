@@ -16,18 +16,23 @@ class TranslationToRomanNumeralTest {
     fun `Rejects zero`() {
         assertFailsWith(
             exceptionClass = IllegalArgumentException::class,
-            message = "0 is not supported by the roman numeral system",
             block = { translator.toText(0) }
-        )
+        ).run {
+            assertEquals("0 is not supported by the roman numeral system", message)
+        }
     }
 
     @Test
     fun `Rejects negative values`() {
         assertFailsWith(
             exceptionClass = IllegalArgumentException::class,
-            message = "Negative numbers are not supported by the roman numeral system",
             block = { translator.toText(-1) }
-        )
+        ).run {
+            assertEquals(
+                "Negative numbers are not supported by the roman numeral system",
+                message
+            )
+        }
     }
 
     @ParameterizedTest
@@ -73,9 +78,12 @@ class TranslationFromRomanNumeralTest {
     fun `Rejects blank strings`(text: String) {
         assertFailsWith(
             exceptionClass = IllegalArgumentException::class,
-            message = "Textual representation of a roman numeral cannot be empty or blank",
             block = { translator.fromText(text) }
-        )
+        ).run {
+            assertEquals(
+                "Textual representation of a roman numeral cannot be empty or blank", message
+            )
+        }
     }
 
     @ParameterizedTest
@@ -83,9 +91,10 @@ class TranslationFromRomanNumeralTest {
     fun `Rejects invalid characters`(text: String) {
         assertFailsWith(
             exceptionClass = IllegalArgumentException::class,
-            message = "Text must contain only valid roman numerals",
             block = { translator.fromText(text) },
-        )
+        ).run {
+            assertEquals("Text must contain only valid roman numerals", message)
+        }
     }
 
     @ParameterizedTest
