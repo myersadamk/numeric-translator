@@ -3,10 +3,7 @@ package exercise.numerics.translator.roman
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.ArgumentsProvider
-import org.junit.jupiter.params.provider.ArgumentsSource
-import org.junit.jupiter.params.provider.EnumSource
+import org.junit.jupiter.params.provider.*
 import java.util.stream.Stream
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -67,12 +64,13 @@ class RomanNumeralTranslatorTest {
 
 class TranslationFromRomanNumeralTest {
 
-    @Test
-    fun `Rejects blank strings`() {
+    @ParameterizedTest
+    @ValueSource(strings = ["", " "])
+    fun `Rejects blank strings`(text: String) {
         assertFailsWith(
             exceptionClass = IllegalArgumentException::class,
-            message = "Textual representation cannot be empty or blank",
-            block = { translator.fromText("") }
+            message = "Textual representation of a roman numeral cannot be empty or blank",
+            block = { translator.fromText(text) }
         )
     }
 }

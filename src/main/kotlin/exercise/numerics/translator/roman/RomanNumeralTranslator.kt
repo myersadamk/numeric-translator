@@ -28,6 +28,7 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
      * @throws IllegalArgumentException if the text is empty or blank.
      */
     override fun fromText(text: String): Int {
+        validateTextCanBeTranslated(text)
         TODO("Not yet implemented")
     }
 
@@ -40,6 +41,12 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
             }
             if (value < 0) {
                 throw IllegalArgumentException("Negative numbers are not supported by the roman numeral system")
+            }
+        }
+
+        private fun validateTextCanBeTranslated(text: String) {
+            if (text.isBlank()) {
+                throw IllegalArgumentException("Textual representation of a roman numeral cannot be empty or blank")
             }
         }
     }
