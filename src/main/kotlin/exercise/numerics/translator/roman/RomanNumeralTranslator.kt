@@ -24,6 +24,13 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
         }
     }
 
+    /**
+     * @throws IllegalArgumentException if the text is empty or blank.
+     */
+    override fun fromText(text: String): Int {
+        TODO("Not yet implemented")
+    }
+
     companion object {
         val DESCENDING_ROMAN_NUMERALS = RomanNumeral.values().sortedByDescending { it.value }
 

@@ -11,9 +11,9 @@ import java.util.stream.Stream
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
+private val translator: RomanNumeralTranslator = RomanNumeralTranslator()
 
 class RomanNumeralTranslatorTest {
-    private val translator: RomanNumeralTranslator = RomanNumeralTranslator()
 
     @Test
     fun `Rejects zero`() {
@@ -62,5 +62,17 @@ class RomanNumeralTranslatorTest {
                 Arguments.of(3945, "MMMCMXLV"),
             )
         }
+    }
+}
+
+class TranslationFromRomanNumeralTest {
+
+    @Test
+    fun `Rejects blank strings`() {
+        assertFailsWith(
+            exceptionClass = IllegalArgumentException::class,
+            message = "Textual representation cannot be empty or blank",
+            block = { translator.fromText("") }
+        )
     }
 }
