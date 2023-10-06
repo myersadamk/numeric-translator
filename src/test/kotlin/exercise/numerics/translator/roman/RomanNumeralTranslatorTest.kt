@@ -1,6 +1,8 @@
 package exercise.numerics.translator.roman
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.EnumSource
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
@@ -26,8 +28,9 @@ class RomanNumeralTranslatorTest {
         )
     }
 
-    @Test
-    fun `Translates 1000 to M`() {
-        assertEquals("M", translator.toText(1000))
+    @ParameterizedTest
+    @EnumSource(RomanNumeral::class)
+    fun `Translates evenly-divisible Roman Numerals`(romanNumeral: RomanNumeral) {
+        assertEquals(romanNumeral.symbol, translator.toText(romanNumeral.value))
     }
 }
