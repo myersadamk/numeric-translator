@@ -10,7 +10,7 @@ import kotlin.test.assertFailsWith
 
 private val translator: RomanNumeralTranslator = RomanNumeralTranslator()
 
-class RomanNumeralTranslatorTest {
+class TranslationToRomanNumeralTest {
 
     @Test
     fun `Rejects zero`() {
@@ -62,6 +62,10 @@ class RomanNumeralTranslatorTest {
     }
 }
 
+/**
+ * Note: in JUnit, I sometimes use @Nested to group tests containing similar functionality. Since
+ * Kotlin can have multiple public classes in a file, it seems reasonable to split them out instead.
+ */
 class TranslationFromRomanNumeralTest {
 
     @ParameterizedTest
@@ -72,5 +76,11 @@ class TranslationFromRomanNumeralTest {
             message = "Textual representation of a roman numeral cannot be empty or blank",
             block = { translator.fromText(text) }
         )
+    }
+
+    @ParameterizedTest
+    @EnumSource(RomanNumeral::class)
+    fun `Translates evenly-divisible Roman Numerals`(romanNumeral: RomanNumeral) {
+        assertEquals(romanNumeral.value, translator.fromText(romanNumeral.symbol))
     }
 }
