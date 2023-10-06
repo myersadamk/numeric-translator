@@ -64,7 +64,12 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
 
         // The relationship between string/char as it relates to `enumValueOf` is a bit awkward/verbose;
         // enumValueOf is generally preferred to Enum.valueOf in Kotlin because it has a reified type
-        private fun toRomanNumeral(character: Char) =
-            enumValueOf<RomanNumeral>(character.toString())
+        private fun toRomanNumeral(character: Char): RomanNumeral {
+            val symbol = character.toString()
+            if (!RomanNumeral.VALID_SYMBOLS.contains(symbol)) {
+                throw IllegalArgumentException("Text must contain only valid roman numerals")
+            }
+            return enumValueOf<RomanNumeral>(symbol)
+        }
     }
 }

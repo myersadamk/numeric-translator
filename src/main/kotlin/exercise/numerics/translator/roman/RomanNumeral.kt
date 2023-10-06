@@ -17,5 +17,6 @@ enum class RomanNumeral(val value: Int, val symbol: String) {
 
     companion object {
         val DESCENDING_ORDER = RomanNumeral.values().sortedByDescending { it.value }
+        val VALID_SYMBOLS = RomanNumeral.values().map { it.symbol }.toSet()
     }
 }
