@@ -30,9 +30,9 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
         validateTextCanBeTranslated(text)
         var result = 0
 
-        text.windowed(2, 1, partialWindows = true) {
-            val currentRomanNumeral = toRomanNumeral(it.first())
-            val nextRomanNumeral = it.lastOrNull()?.let { toRomanNumeral(it) }
+        text.windowed(2, 1, partialWindows = true) { chars ->
+            val currentRomanNumeral = toRomanNumeral(chars.first())
+            val nextRomanNumeral = chars.lastOrNull()?.let { toRomanNumeral(it) }
 
             if (nextRomanNumeral == null) {
                 result += currentRomanNumeral.value
