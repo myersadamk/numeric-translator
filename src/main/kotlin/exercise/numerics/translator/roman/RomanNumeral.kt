@@ -13,5 +13,10 @@ enum class RomanNumeral(val value: Int, val symbol: String) {
     CD(400, "CD"),
     D(500, "D"),
     CM(900, "CM"),
-    M(1000, "M")
+    M(1000, "M");
+
+    companion object {
+        val DESCENDING_ORDER = RomanNumeral.values().sortedByDescending { it.value }
+        val VALID_SYMBOLS = RomanNumeral.values().map { it.symbol }.toSet()
+    }
 }
