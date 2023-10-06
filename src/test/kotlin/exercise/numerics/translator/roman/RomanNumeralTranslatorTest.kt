@@ -46,25 +46,6 @@ class TranslationToRomanNumeralTest {
     fun `Translates non evenly-divisible Roman Numerals`(value: Int, translation: String) {
         assertEquals(translation, translator.toText(value))
     }
-
-    class NonEvenlyDivisibleScenarios : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> {
-            return Stream.of(
-                Arguments.of(6, "VI"),
-                Arguments.of(11, "XI"),
-                Arguments.of(15, "XV"),
-                Arguments.of(42, "XLII"),
-                Arguments.of(55, "LV"),
-                Arguments.of(93, "XCIII"),
-                Arguments.of(104, "CIV"),
-                Arguments.of(444, "CDXLIV"),
-                Arguments.of(594, "DXCIV"),
-                Arguments.of(949, "CMXLIX"),
-                Arguments.of(1994, "MCMXCIV"),
-                Arguments.of(3945, "MMMCMXLV"),
-            )
-        }
-    }
 }
 
 /**
@@ -101,5 +82,31 @@ class TranslationFromRomanNumeralTest {
     @EnumSource(RomanNumeral::class)
     fun `Translates evenly-divisible Roman Numerals`(romanNumeral: RomanNumeral) {
         assertEquals(romanNumeral.value, translator.fromText(romanNumeral.symbol))
+    }
+
+
+    @ParameterizedTest
+    @ArgumentsSource(NonEvenlyDivisibleScenarios::class)
+    fun `Translates non evenly-divisible Roman Numerals`(value: Int, translation: String) {
+        assertEquals(value, translator.fromText(translation))
+    }
+}
+
+class NonEvenlyDivisibleScenarios : ArgumentsProvider {
+    override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> {
+        return Stream.of(
+            Arguments.of(6, "VI"),
+            Arguments.of(11, "XI"),
+            Arguments.of(15, "XV"),
+            Arguments.of(42, "XLII"),
+            Arguments.of(55, "LV"),
+            Arguments.of(93, "XCIII"),
+            Arguments.of(104, "CIV"),
+            Arguments.of(444, "CDXLIV"),
+            Arguments.of(594, "DXCIV"),
+            Arguments.of(949, "CMXLIX"),
+            Arguments.of(1994, "MCMXCIV"),
+            Arguments.of(3945, "MMMCMXLV"),
+        )
     }
 }
