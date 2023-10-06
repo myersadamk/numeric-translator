@@ -9,14 +9,17 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
      */
     override fun toText(value: Int): String {
         validateIntCanBeTranslated(value)
+        var remainder = value
 
         return buildString {
             for (romanNumeral in DESCENDING_ROMAN_NUMERALS) {
-                val occurrences = value / romanNumeral.value
+                val occurrences = remainder / romanNumeral.value
 
                 if (occurrences > 0) {
                     append(romanNumeral.symbol.repeat(occurrences))
                 }
+
+                remainder %= romanNumeral.value
             }
         }
     }
