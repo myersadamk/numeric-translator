@@ -47,7 +47,7 @@ class RomanNumeralCommandLineIntegrationTest {
 
     private fun assertShellCommandResult(command: String, expected: String) {
         val session = client.interactive().run()
-        session.write(session.writeSequence().text(command).carriageReturn().build());
+        session.write(session.writeSequence().text(command).carriageReturn().build())
 
         await().atMost(1, TimeUnit.SECONDS).until {
             val output =
