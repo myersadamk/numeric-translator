@@ -16,4 +16,8 @@ data class SimpleTranslatorCommand<T>(
         }
         context.terminal.writer().println(result)
     }
+
+    fun translateFrom(context: CommandContext) {
+        TODO()
+    }
 }

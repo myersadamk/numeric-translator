@@ -24,22 +24,35 @@ class SimpleTranslatorCommandTest(
     )
 
     private val mockPrintWriter: PrintWriter = mockPrintWriter()
+    private val printWriterSlot = slot<String>()
 
     @Test
-    fun `translateTo() passes argument from context and writes it back`() {
+    fun `translateTo() passes argument from context and writes result`() {
         every { commandContext.getOptionValue<Int>(any()) } returns 1
 
-        val serviceSlot = slot<Int>()
-        every { translator.toText(capture(serviceSlot)) } returns "translated"
-
-        val printWriterSlot = slot<String>()
+        every { translator.toText(1) } returns "translated"
         every { mockPrintWriter.println(capture(printWriterSlot)) } returns Unit
 
         command.translateTo(commandContext)
 
-        assertEquals(1, serviceSlot.captured)
         assertEquals("translated", printWriterSlot.captured)
     }
+
+    @Test
+    fun `translateFrom() passes argument from context and writes result`() {
+        every { commandContext.getOptionValue<String>(any()) } returns "1"
+
+        val serviceSlot = slot<String>()
+        every { translator.fromText("1") } returns 1
+        every { mockPrintWriter.println(capture(printWriterSlot)) } returns Unit
+
+        command.translateFrom(commandContext)
+
+        assertEquals("1", serviceSlot.captured)
+        assertEquals("1", printWriterSlot.captured)
+    }
+
+    // TODO: Exceptional cases; omitted for exercise brevity
 
     private fun mockPrintWriter(): PrintWriter {
         val mockTerminal: Terminal = mockk()
