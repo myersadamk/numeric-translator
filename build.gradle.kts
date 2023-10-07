@@ -24,7 +24,12 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springframework.shell:spring-shell-starter")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.shell:spring-shell-test")
+	testImplementation("org.springframework.shell:spring-shell-test-autoconfigure")
 	testImplementation("org.jetbrains.kotlin:kotlin-test:1.9.10")
+	testImplementation("org.awaitility:awaitility:4.2.0")
+	testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+	testImplementation("io.mockk:mockk:1.13.8")
 }
 
 dependencyManagement {
