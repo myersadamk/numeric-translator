@@ -31,8 +31,18 @@ class RomanNumeralCommandLineIntegrationTest {
     }
 
     @Test
+    fun `Interactive shell handles to-roman-numeral command (positional arg)`() {
+        assertShellCommandResult("to-roman-numeral 123", "CXXIII")
+    }
+
+    @Test
     fun `Interactive shell handles from-roman-numeral command`() {
         assertShellCommandResult("from-roman-numeral --value XIV", "14")
+    }
+
+    @Test
+    fun `Interactive shell handles from-roman-numeral command (positional arg)`() {
+        assertShellCommandResult("from-roman-numeral XIV", "14")
     }
 
     private fun assertShellCommandResult(command: String, expected: String) {
