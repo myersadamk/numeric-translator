@@ -1,10 +1,12 @@
 # numeric-translator
 Exercise problem for translating Roman numerals.
 
+I made an effort to structure my commits to show TDD as well as my working process. I also split
+out branches for the three main features: translation from, translation to, and the shell.
+
 When I'm asked to do a programming exercise (and time permits), I like to use it as an opportunity 
 to learn and expand on my skills. For this project, I decided to use the latest [Spring Shell](https://docs.spring.io/spring-shell/docs/3.1.4/docs/index.html#what-is-spring-shell)
-and learn my way around it. I could have done this in either Java or Kotlin, but I chose Kotlin
-to continue building my knowledge around it.
+and learn my way around it.
 
 At the risk of being too generic, I chose to name the project `numeric-translator` because it 
 doesn't confine the project to one numeric system. I mostly want to demonstrate thoughtfulness.
