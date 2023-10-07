@@ -76,6 +76,7 @@ Text must only contain valid roman numeral symbols
 ```
 
 ## Things I didn't get around to
+* I did not write as much documentation as I typically would for a production project.
 * I did not do a thorough QA of the shell experience - I'm sure there are rough edges.
 * I wrote about 90% of the tests I would write for production code, so my coverage is not complete.
 * I did not go back and take a thoughtful look over the work to see if it could use further
