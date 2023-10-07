@@ -9,15 +9,23 @@ data class SimpleTranslatorCommand<T>(
     private val translator: NumericTranslator<T>
 ) {
     fun translateTo(context: CommandContext) {
-        val result = runCatching {
+        writeResultOrError(context) {
             translator.toText(context.getOptionValue(argumentName))
+        }
+    }
+
+    fun translateFrom(context: CommandContext) {
+        writeResultOrError(context) {
+            translator.fromText(context.getOptionValue(argumentName))
+        }
+    }
+
+    private fun <T> writeResultOrError(context: CommandContext, translationFunction: () -> T) {
+        val result = runCatching {
+            translationFunction()
         }.getOrElse { error ->
             error.message ?: "Unknown error: $error"
         }
         context.terminal.writer().println(result)
-    }
-
-    fun translateFrom(context: CommandContext) {
-        TODO()
     }
 }
