@@ -1,7 +1,9 @@
 package exercise.numerics.translator.roman
 
 import exercise.numerics.translator.NumericTranslator
+import org.springframework.stereotype.Service
 
+@Service
 class RomanNumeralTranslator : NumericTranslator<Int> {
 
     /**
