@@ -1,6 +1,6 @@
 package exercise.numerics.translator
 
-import exercise.numerics.translator.config.CommandConfig
+import exercise.numerics.translator.roman.RomanNumeralCommandsConfig
 import exercise.numerics.translator.roman.RomanNumeralTranslator
 import exercise.numerics.translator.roman.TranslationError.ZERO_NOT_SUPPORTED
 import org.awaitility.Awaitility.await
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.test.Test
 
 @ShellTest
-@Import(value = [CommandConfig::class, RomanNumeralTranslator::class])
+@Import(value = [RomanNumeralCommandsConfig::class, RomanNumeralTranslator::class])
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class RomanNumeralCommandLineIntegrationTest {
 

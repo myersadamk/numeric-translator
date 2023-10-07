@@ -1,14 +1,13 @@
-package exercise.numerics.translator.config
+package exercise.numerics.translator.roman
 
 import exercise.numerics.translator.SimpleTranslatorCommand
-import exercise.numerics.translator.roman.RomanNumeralTranslator
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.shell.command.CommandRegistration
 import org.springframework.shell.context.InteractionMode
 
 @Configuration
-class CommandConfig(romanNumeralTranslator: RomanNumeralTranslator) {
+class RomanNumeralCommandsConfig(romanNumeralTranslator: RomanNumeralTranslator) {
 
     private val command = SimpleTranslatorCommand(
         key = "roman-numeral",
