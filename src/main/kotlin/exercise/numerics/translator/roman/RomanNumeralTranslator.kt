@@ -1,6 +1,7 @@
 package exercise.numerics.translator.roman
 
 import exercise.numerics.translator.NumericTranslator
+import exercise.numerics.translator.roman.TranslationError.*
 import org.springframework.stereotype.Service
 
 @Service
@@ -51,16 +52,16 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
 
         private fun validateIntCanBeTranslated(value: Int) {
             if (value == 0) {
-                throw IllegalArgumentException("0 is not supported by the roman numeral system")
+                throw IllegalArgumentException(ZERO_NOT_SUPPORTED.message)
             }
             if (value < 0) {
-                throw IllegalArgumentException("Negative numbers are not supported by the roman numeral system")
+                throw IllegalArgumentException(NEGATIVE_VALUES_NOT_SUPPORTED.message)
             }
         }
 
         private fun validateTextCanBeTranslated(text: String) {
             if (text.isBlank()) {
-                throw IllegalArgumentException("Textual representation of a roman numeral cannot be empty or blank")
+                throw IllegalArgumentException(TEXT_CANNOT_BE_BLANK.message)
             }
         }
 
@@ -69,7 +70,7 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
         private fun toRomanNumeral(character: Char): RomanNumeral {
             val symbol = character.toString()
             if (!RomanNumeral.VALID_SYMBOLS.contains(symbol)) {
-                throw IllegalArgumentException("Text must contain only valid roman numerals")
+                throw IllegalArgumentException(INVALID_SYMBOL.message)
             }
             return enumValueOf<RomanNumeral>(symbol)
         }

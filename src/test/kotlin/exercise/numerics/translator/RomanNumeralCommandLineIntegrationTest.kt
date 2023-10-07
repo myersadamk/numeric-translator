@@ -2,6 +2,7 @@ package exercise.numerics.translator
 
 import exercise.numerics.translator.config.CommandConfig
 import exercise.numerics.translator.roman.RomanNumeralTranslator
+import exercise.numerics.translator.roman.TranslationError.ZERO_NOT_SUPPORTED
 import org.awaitility.Awaitility.await
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Import
@@ -21,7 +22,7 @@ class RomanNumeralCommandLineIntegrationTest {
 
     @Test
     fun `Interactive shell gracefully handles invalid values in to-roman-numeral command`() {
-        assertShellCommandResult("to-roman-numeral --value 0", "CXXIII")
+        assertShellCommandResult("to-roman-numeral --value 0", ZERO_NOT_SUPPORTED.message)
     }
 
     @Test

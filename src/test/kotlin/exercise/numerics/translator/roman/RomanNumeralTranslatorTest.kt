@@ -1,5 +1,6 @@
 package exercise.numerics.translator.roman
 
+import exercise.numerics.translator.roman.TranslationError.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
@@ -18,7 +19,7 @@ class TranslationToRomanNumeralTest {
             exceptionClass = IllegalArgumentException::class,
             block = { translator.toText(0) }
         ).run {
-            assertEquals("0 is not supported by the roman numeral system", message)
+            assertEquals(ZERO_NOT_SUPPORTED.message, message)
         }
     }
 
@@ -28,10 +29,7 @@ class TranslationToRomanNumeralTest {
             exceptionClass = IllegalArgumentException::class,
             block = { translator.toText(-1) }
         ).run {
-            assertEquals(
-                "Negative numbers are not supported by the roman numeral system",
-                message
-            )
+            assertEquals(NEGATIVE_VALUES_NOT_SUPPORTED.message, message)
         }
     }
 
@@ -61,9 +59,7 @@ class TranslationFromRomanNumeralTest {
             exceptionClass = IllegalArgumentException::class,
             block = { translator.fromText(text) }
         ).run {
-            assertEquals(
-                "Textual representation of a roman numeral cannot be empty or blank", message
-            )
+            assertEquals(TEXT_CANNOT_BE_BLANK.message, message)
         }
     }
 
@@ -74,7 +70,7 @@ class TranslationFromRomanNumeralTest {
             exceptionClass = IllegalArgumentException::class,
             block = { translator.fromText(text) },
         ).run {
-            assertEquals("Text must contain only valid roman numerals", message)
+            assertEquals(INVALID_SYMBOL.message, message)
         }
     }
 
