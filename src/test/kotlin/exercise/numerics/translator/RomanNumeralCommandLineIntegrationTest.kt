@@ -30,6 +30,11 @@ class RomanNumeralCommandLineIntegrationTest {
         assertShellCommandResult("to-roman-numeral --value 123", "CXXIII")
     }
 
+    @Test
+    fun `Interactive shell handles from-roman-numeral command`() {
+        assertShellCommandResult("from-roman-numeral --value XIV", "14")
+    }
+
     private fun assertShellCommandResult(command: String, expected: String) {
         val session = client.interactive().run()
         session.write(session.writeSequence().text(command).carriageReturn().build());
