@@ -33,7 +33,11 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
         validateTextCanBeTranslated(text)
         var result = 0
 
-        text.windowed(2, 1, partialWindows = true) { chars ->
+        text.windowed(
+            TWO_CHARACTERS_AT_A_TIME,
+            ITERATE_BY_ONE_CHARACTER,
+            partialWindows = true
+        ) { chars ->
             val currentRomanNumeral = toRomanNumeral(chars.first())
             val nextRomanNumeral = chars.lastOrNull()?.let { toRomanNumeral(it) }
 
@@ -49,6 +53,10 @@ class RomanNumeralTranslator : NumericTranslator<Int> {
     }
 
     companion object {
+
+        // These constants are used to make the windowed function more readable
+        const val TWO_CHARACTERS_AT_A_TIME = 2
+        const val ITERATE_BY_ONE_CHARACTER = 1
 
         private fun validateIntCanBeTranslated(value: Int) {
             if (value == 0) {
